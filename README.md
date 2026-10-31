@@ -21,7 +21,7 @@ One mechanic: **jump**. No text during the level; the design teaches the player.
 Save the file and reload the browser to see the change.
 
 ### Live-change examples (for the presentation)
-- Higher jump: `JUMP_VELOCITY = 640` → `760` in `game.js`.
+- Higher jump: `JUMP_VELOCITY = 700` → `820` in `game.js`.
 - Moon gravity: `GRAVITY = 1500` → `700`.
 - Move a bat: in `level.js` move a `b` to another column on the same row.
 - Add spikes: replace a `.` on the row just above the ground with `^`.

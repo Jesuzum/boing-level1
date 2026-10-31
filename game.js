@@ -4,17 +4,17 @@
 // =====================================================================
 const TILE            = 32;    // size of one map character, in pixels
 const GRAVITY         = 1500;  // px/s²  — higher = heavier, faster falls
-const JUMP_VELOCITY   = 640;   // px/s   — jump strength (~4.3 tiles high)
+const JUMP_VELOCITY   = 700;   // px/s   — jump strength (~5.1 tiles high)
 const JUMP_CUT        = 0.45;  // releasing jump early keeps this much upward speed (short hop)
 const MAX_FALL_SPEED  = 900;   // px/s   — terminal velocity
 const RUN_SPEED       = 230;   // px/s   — top horizontal speed
 const RUN_ACCEL       = 1800;  // px/s²  — how fast you reach top speed on the ground
-const AIR_ACCEL       = 1300;  // px/s²  — steering while in the air
+const AIR_ACCEL       = 1700;  // px/s²  — steering while in the air
 const GROUND_FRICTION = 2200;  // px/s²  — how fast you stop when no key is held
 const COYOTE_MS       = 100;   // ms you can still jump after walking off a ledge
 const JUMP_BUFFER_MS  = 120;   // ms a jump press is remembered before landing
 const STOMP_BOUNCE    = 480;   // px/s   — bounce after landing on a bat
-const BAT_SPEED       = 1.8;   // rad/s  — how fast bats move back and forth
+const BAT_SPEED       = 1.2;   // rad/s  — how fast bats move back and forth
 const BAT_RANGE       = 2;     // tiles  — how far bats fly from their start
 const CAMERA_LOOKAHEAD= 170;   // px     — camera shows this much more space ahead of you
 const CAMERA_LERP     = 0.12;  // 0..1   — camera smoothing (1 = rigid)
