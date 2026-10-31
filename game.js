@@ -65,9 +65,15 @@ const run = {
 // =====================================================================
 const Sfx = {
   ctx: null,
-  init() { try { this.ctx = this.ctx || new (window.AudioContext || window.webkitAudioContext)(); this.ctx.resume(); } catch (e) {} },
+  init() {
+    try {
+      this.ctx = this.ctx || new (window.AudioContext || window.webkitAudioContext)();
+      if (this.ctx.state !== 'running') this.ctx.resume();
+    } catch (e) {}
+  },
   tone(f0, f1, dur, type = 'square', vol = 0.12, delay = 0) {
     if (!this.ctx) return;
+    if (this.ctx.state !== 'running') { this.ctx.resume(); } // browser may pause audio (tab switch, headphones…)
     const t = this.ctx.currentTime + delay, o = this.ctx.createOscillator(), g = this.ctx.createGain();
     o.type = type; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
     g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
@@ -82,6 +88,10 @@ const Sfx = {
   check() { this.tone(660, 660, 0.08, 'triangle', 0.12); this.tone(880, 880, 0.14, 'triangle', 0.12, 0.08); },
   win()   { [523, 659, 784, 1047, 784, 1047].forEach((f, i) => this.tone(f, f, 0.16, 'triangle', 0.14, i * 0.11)); },
 };
+// Chrome only lets audio start/resume inside a real key press or click,
+// so wake the sound on every one (not just on the title screen).
+['keydown', 'pointerdown', 'touchstart'].forEach(ev => window.addEventListener(ev, () => Sfx.init(), true));
+document.addEventListener('visibilitychange', () => { if (!document.hidden && Sfx.ctx) Sfx.ctx.resume(); });
 
 // =====================================================================
 //  BOOT: draw every texture in code (no image files needed)
